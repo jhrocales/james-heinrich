@@ -1,0 +1,273 @@
+/* ═══════════════════════════════════════════
+   SHOWCASE — What I Provide
+   Variables from index.css
+═══════════════════════════════════════════ */
+
+/* ── Section ─────────────────────────────────────────────────────── */
+.showcase {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  overflow: hidden;
+  background: var(--bg-second);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px var(--site-padding) 0px;
+}
+
+/* ── Container ───────────────────────────────────────────────────── */
+.showcase__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+  max-width: 1200px;
+  height: 100%;
+  justify-content: center;
+}
+
+/* ── Title ───────────────────────────────────────────────────────── */
+.showcase__title {
+  font-family: "Marcellus", serif;
+  font-weight: 400;
+  font-size: clamp(32px, 4vw, 56px);
+  letter-spacing: 0.01em;
+  color: var(--text-primary);
+  text-align: center;
+  flex-shrink: 0;
+  margin-bottom: clamp(32px, 5vh, 64px);
+}
+
+/* ── Gallery ─────────────────────────────────────────────────────── */
+.showcase__gallery {
+  position: relative;
+  padding-top: 40px;
+  width: 100%;
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* ── Devices ─────────────────────────────────────────────────────── */
+.showcase__devices {
+  position: relative;
+  width: 100%;
+  height: clamp(200px, 30vh, 340px);
+  z-index: 1;
+}
+
+.showcase__designs {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+  width: min(112%, 780px);
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0px 24px 48px rgba(15, 14, 23, 0.8));
+  user-select: none;
+  pointer-events: none;
+}
+
+.showcase__devices--enter {
+  animation: devicesEnter 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.showcase__devices--exit {
+  animation: devicesExit 0.4s ease both;
+}
+
+@keyframes devicesEnter {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes devicesExit {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+/* ── Ellipse spotlight ────────────────────────────────────────────── */
+.showcase__ellipse-spot {
+  position: relative;
+  width: 90%;
+  margin-top: -20px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.showcase__ellipse-spot img {
+  width: 100%;
+  display: block;
+}
+
+/* ── Divider ─────────────────────────────────────────────────────── */
+.showcase__divider {
+  width: 84%;
+  height: 1px;
+  margin: 0 auto;
+  background: linear-gradient(
+    90deg,
+    rgba(37, 35, 49, 0) 0%,
+    var(--border-color) 25%,
+    var(--border-color) 75%,
+    rgba(37, 35, 49, 0) 100%
+  );
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Label ───────────────────────────────────────────────────────── */
+.showcase__label-wrap {
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  overflow: hidden;
+}
+
+.showcase__label {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  font-size: clamp(16px, 1.8vw, 24px);
+  color: var(--text-secondary);
+  letter-spacing: 0.06em;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.showcase__label--enter {
+  animation: labelEnter 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.showcase__label--exit {
+  animation: labelExit 0.4s ease both;
+}
+
+@keyframes labelEnter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes labelExit {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+}
+
+/* ── Dots — on brand glass style ─────────────────────────────────── */
+.showcase__dots {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.showcase__dot {
+  position: relative;
+  width: 28px;
+  height: 6px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  overflow: hidden;
+  background: var(--bg-layer);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  transition:
+    background 0.3s ease,
+    transform 0.3s ease,
+    width 0.3s ease;
+}
+
+/* inactive dot — narrow */
+.showcase__dot:not(.showcase__dot--active) {
+  width: 6px;
+  background: rgba(244, 242, 255, 0.15);
+}
+
+/* active dot — wider pill, violet glass */
+.showcase__dot--active {
+  width: 28px;
+  background: rgba(139, 92, 246, 0.25);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+    0 0 8px rgba(139, 92, 246, 0.4);
+}
+
+/* active dot specular rim */
+.showcase__dot--active::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 15%;
+  right: 15%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.35),
+    transparent
+  );
+}
+
+/* active dot fill bar */
+.showcase__dot--active::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    rgba(139, 92, 246, 0.6),
+    rgba(167, 139, 250, 0.8),
+    rgba(139, 92, 246, 0.6)
+  );
+}
+
+/* ── Responsive ──────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .showcase {
+    padding: 80px var(--site-padding) 40px;
+    height: auto;
+    min-height: 100dvh;
+  }
+
+  .showcase__devices {
+    height: 220px;
+  }
+}

@@ -1,0 +1,456 @@
+/* ═══════════════════════════════════════════
+   MORE INFORMATION SECTION
+   Variables from index.css
+═══════════════════════════════════════════ */
+
+/* ── Section wrapper ── */
+.more {
+  position: relative;
+  width: 100%;
+  height: 100dvh; /* exactly one viewport */
+  background: var(--bg-second);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* vertically center everything */
+  overflow: hidden;
+  padding: 0 var(--site-padding);
+  gap: 32px; /* breathing room between eyebrow and grid */
+}
+
+.cta-btn--no-arrow {
+  gap: 0;
+  height: 56px;
+  padding: 0 32px;
+}
+
+/* ── Eyebrow label ── */
+.more__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.more__eyebrow-word {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.more__eyebrow-dot {
+  font-size: 8px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* ── Card grid ── */
+.more__grid {
+  display: flex;
+  align-items: center; /* vertically align cards to center axis */
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 1200px;
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════
+   SHARED CARD BASE
+═══════════════════════════════════════════ */
+.card {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+/* specular rim */
+.card__specular {
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 1px;
+  pointer-events: none;
+  z-index: 3;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.55) 50%,
+    transparent 100%
+  );
+}
+
+/* dome reflection */
+.card__dome {
+  position: absolute;
+  top: 0;
+  left: -1px;
+  border-radius: 24px 24px 0 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* bottom depth fade */
+.card__base {
+  position: absolute;
+  left: -1px;
+  border-radius: 0 0 24px 24px;
+  background: linear-gradient(
+    180deg,
+    rgba(11, 10, 18, 0) 0%,
+    rgba(0, 0, 0, 0.45) 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ═══════════════════════════════════════════
+   SIDE CARDS  (Explore + Discover)
+═══════════════════════════════════════════ */
+.card--side {
+  width: 300px;
+  height: 400px; /* reduced from 440px */
+  padding: 64px 28px 28px; /* top padding creates space for absolute tag */
+  background: rgba(22, 21, 34, 0.7);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  gap: 10px;
+}
+
+.card--side .card__specular {
+  width: 240px;
+}
+
+.card--side .card__dome {
+  width: 300px;
+  height: 200px;
+  background: linear-gradient(
+    180deg,
+    rgba(244, 242, 255, 0.06) 0%,
+    transparent 100%
+  );
+}
+
+.card--side .card__base {
+  width: 300px;
+  height: 80px;
+  top: 320px;
+}
+
+/* ═══════════════════════════════════════════
+   CENTER CARD  (Connect)
+═══════════════════════════════════════════ */
+.card--center {
+  width: 380px;
+  height: 500px; /* reduced from 560px */
+  padding: 64px 32px 32px; /* top padding creates space for absolute tag */
+  background: rgba(139, 92, 246, 0.1);
+  border: 1px solid rgba(167, 139, 250, 0.25);
+  box-shadow: 0 12px 32px 0 var(--purple-soft);
+  align-items: center;
+  gap: 12px;
+}
+
+.card--center .card__specular {
+  width: 304px;
+  height: 1.5px;
+}
+
+.card--center .card__dome {
+  width: 380px;
+  height: 250px;
+  left: -1px;
+  top: -1px;
+  background: linear-gradient(
+    180deg,
+    rgba(244, 242, 255, 0.12) 0%,
+    transparent 100%
+  );
+}
+
+.card--center .card__base {
+  width: 380px;
+  height: 100px;
+  top: 400px;
+}
+
+/* ═══════════════════════════════════════════
+   CARD TYPOGRAPHY
+═══════════════════════════════════════════ */
+
+/* tag — absolute so it doesn't affect flow */
+.card__tag {
+  position: absolute;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 300;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  top: 28px;
+  z-index: 4;
+}
+
+.card__tag--left {
+  left: 28px;
+}
+.card__tag--right {
+  right: 28px;
+}
+.card__tag--center {
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  white-space: nowrap;
+}
+
+/* title */
+.card__title {
+  font-family: "Marcellus", serif;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  white-space: pre-line;
+  position: relative;
+  z-index: 4;
+  flex-shrink: 0;
+}
+
+.card--center .card__title {
+  font-size: 26px;
+  letter-spacing: 0.08em;
+  text-align: center;
+}
+
+.card--discover .card__title {
+  text-align: right;
+}
+
+/* body */
+.card__body {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 300;
+  font-size: 11px; /* up from 9px — more readable */
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+  color: var(--text-secondary);
+  position: relative;
+  z-index: 4;
+  flex: 1; /* pushes button to bottom */
+}
+
+.card--center .card__body {
+  text-align: center;
+}
+.card--discover .card__body {
+  text-align: right;
+}
+
+/* ═══════════════════════════════════════════
+   SOCIAL ICON LINKS  (Connect card)
+═══════════════════════════════════════════ */
+.card__icon-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  position: relative;
+  z-index: 4;
+  flex-shrink: 0;
+}
+
+.card__icon-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+  flex-shrink: 0;
+}
+.card__icon-link:hover {
+  opacity: 1;
+}
+
+.card__icon-link img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ═══════════════════════════════════════════
+   LOWKEY GLASS BUTTON  (side cards)
+═══════════════════════════════════════════ */
+.btn-lowkey {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 4;
+  flex-shrink: 0;
+  text-decoration: none;
+  align-self: flex-start; /* left-align on explore, right on discover via JSX */
+  box-shadow:
+    0 2px 8px 0 rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 0 var(--white-soft),
+    inset 0 -1px 4px 0 rgba(0, 0, 0, 0.2);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.btn-lowkey::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: rgba(11, 10, 18, 0.5);
+  pointer-events: none;
+}
+
+.btn-lowkey__dome {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  border-radius: 12px 12px 0 0;
+  background: linear-gradient(
+    180deg,
+    rgba(244, 242, 255, 0.06) 0%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.btn-lowkey__spec {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 1px;
+  background: linear-gradient(
+    270deg,
+    transparent 0%,
+    rgba(244, 242, 255, 0.6) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+  filter: blur(0.5px);
+}
+
+.btn-lowkey__label {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 300;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(148, 145, 161, 0.7);
+  position: relative;
+  z-index: 3;
+  white-space: nowrap;
+}
+
+.btn-lowkey__divider {
+  width: 1px;
+  height: 16px;
+  background: rgba(167, 139, 250, 0.12);
+  position: relative;
+  z-index: 3;
+  flex-shrink: 0;
+}
+
+.btn-lowkey__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: rgba(22, 21, 34, 0.12);
+  border: 0.5px solid rgba(148, 145, 161, 0.12);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  position: relative;
+  z-index: 3;
+  flex-shrink: 0;
+}
+
+.btn-lowkey__arrow--right img {
+  transform: rotate(180deg);
+}
+
+.btn-lowkey__arrow img {
+  width: 11px;
+  height: 11px;
+  object-fit: contain;
+  display: block;
+}
+
+.btn-lowkey:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 4px 16px 0 rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* discover card — right-align button */
+.card--discover .btn-lowkey {
+  align-self: flex-end;
+}
+
+/* ── Entrance animations ── */
+.more__eyebrow,
+.card--explore,
+.card--center,
+.card--discover {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+}
+
+/* when JS adds this class, element animates in */
+.more__eyebrow.is-visible,
+.card--explore.is-visible,
+.card--center.is-visible,
+.card--discover.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* staggered delays */
+.card--explore {
+  transition-delay: 0.1s;
+}
+.card--center {
+  transition-delay: 0.25s;
+}
+.card--discover {
+  transition-delay: 0.4s;
+}

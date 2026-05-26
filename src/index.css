@@ -1,0 +1,81 @@
+@import url("https://fonts.googleapis.com/css2?family=Marcellus&family=DM+Sans:wght@300;400&family=Open+Sans:wght@300;400&display=swap");
+
+:root {
+  /* ─────────────────────────
+     LAYOUT
+  ───────────────────────── */
+
+  --site-padding: clamp(24px, 4vw, 160px);
+
+  /* ─────────────────────────
+     COLORS
+  ───────────────────────── */
+
+  --bg-main: #0b0a12;
+  --bg-second: #0f0e17;
+  --bg-layer: #161522;
+
+  --text-primary: #f4f2ff;
+  --text-secondary: #9491a1;
+
+  --cta-primary: #8b5cf6;
+  --cta-hover: #7c3aed;
+
+  --border-color: #252331;
+
+  /* ─────────────────────────
+     OPTIONAL EFFECT COLORS
+  ───────────────────────── */
+
+  --purple-glow: rgba(139, 92, 246, 0.3);
+  --purple-soft: rgba(139, 92, 246, 0.15);
+
+  --white-soft: rgba(255, 255, 255, 0.08);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  background: var(--bg-main);
+  color: var(--text-primary);
+
+  font-family: "DM Sans", sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.section {
+  position: relative;
+
+  width: 100%;
+
+  min-height: 100dvh;
+
+  overflow: hidden;
+}
+
+/* ─────────────────────────
+   GLOBAL CONTAINER SYSTEM
+───────────────────────── */
+
+.section__container {
+  width: 100%;
+
+  max-width: 1720px;
+
+  margin: 0 auto;
+
+  padding: 140px var(--site-padding);
+}

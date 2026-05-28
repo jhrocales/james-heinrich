@@ -14,35 +14,40 @@ const STEPS = [
     id: 1,
     icon: iconDiscovery,
     label: "Discovery",
-    sub: "Step 01",
+    description:
+      "We talk about your business, goals, audience, and what your website needs to do.",
     col: "left",
   },
   {
     id: 2,
     icon: iconAlignment,
     label: "Alignment",
-    sub: "Step 02",
+    description:
+      "We agree on scope, budget, timeline, pages, and responsibilities before starting.",
     col: "right",
   },
   {
     id: 3,
     icon: iconDesign,
     label: "Design",
-    sub: "Step 03",
+    description:
+      "We shape the visual direction, from colors and typography to layouts, images, and key sections.",
     col: "left",
   },
   {
     id: 4,
     icon: iconDevelopment,
     label: "Development",
-    sub: "Step 04",
+    description:
+      "We turn the approved design into a working website, test it, and publish it live.",
     col: "right",
   },
   {
     id: 5,
     icon: iconGrowth,
     label: "Growth",
-    sub: "Step 05",
+    description:
+      "We keep your website healthy with updates, SEO improvements, security checks, and refinements.",
     col: "left",
   },
 ];
@@ -94,7 +99,7 @@ function GlassNode({ icon, visible, delay }) {
   );
 }
 
-function StepLabel({ label, sub, side, visible, delay }) {
+function StepLabel({ label, description, side, visible, delay }) {
   return (
     <div
       className={`pv-label pv-label--${side}`}
@@ -107,7 +112,7 @@ function StepLabel({ label, sub, side, visible, delay }) {
       }}
     >
       <span className="pv-label__title">{label}</span>
-      <span className="pv-label__sub">{sub}</span>
+      <span className="pv-label__sub">{description}</span>
     </div>
   );
 }
@@ -347,7 +352,7 @@ export default function Process() {
               >
                 <StepLabel
                   label={step.label}
-                  sub={step.sub}
+                  description={step.description}
                   side={step.col}
                   visible={visible}
                   delay={delay}

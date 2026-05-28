@@ -4,13 +4,9 @@ import DesignsImage from "../../assets/Showcase Page/designs.png";
 import TestimonialsImage from "../../assets/Showcase Page/testimonials.png";
 import SEOImage from "../../assets/Showcase Page/SEO.png";
 
-/* ─── Figma Assets ───────────────────────────────────────────────── */
 const IMG_ELLIPSE2 =
   "https://www.figma.com/api/mcp/asset/057862df-d629-43ef-9dbf-3f9ff51dbeb3";
-const IMG_ELLIPSE1 =
-  "https://www.figma.com/api/mcp/asset/db5aa46a-b05c-4d70-807b-0becd122059f";
 
-/* ─── Slides ─────────────────────────────────────────────────────── */
 const SLIDES = [
   { id: 1, label: "Customer Centered Design", image: DesignsImage },
   { id: 2, label: "Verified Client Feedback", image: TestimonialsImage },
@@ -21,7 +17,7 @@ export default function Showcase() {
   const sectionRef = useRef(null);
   const [visible, setVisible] = useState(false);
   const [active, setActive] = useState(0);
-  const [animating, setAnimating] = useState(false);
+  const [direction, setDirection] = useState("next");
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -41,31 +37,24 @@ export default function Showcase() {
     return () => io.disconnect();
   }, []);
 
-  useEffect(() => {
-    if (!visible) return;
+  const goTo = (index) => {
+    if (index === active) return;
 
-    const t = setInterval(() => {
-      setAnimating(true);
-
-      setTimeout(() => {
-        setActive((p) => (p + 1) % SLIDES.length);
-        setAnimating(false);
-      }, 400);
-    }, 3500);
-
-    return () => clearInterval(t);
-  }, [visible]);
-
-  const goTo = (i) => {
-    if (i === active || animating) return;
-
-    setAnimating(true);
-
-    setTimeout(() => {
-      setActive(i);
-      setAnimating(false);
-    }, 400);
+    setDirection(index > active ? "next" : "prev");
+    setActive(index);
   };
+
+  const goPrev = () => {
+    setDirection("prev");
+    setActive((current) => (current === 0 ? SLIDES.length - 1 : current - 1));
+  };
+
+  const goNext = () => {
+    setDirection("next");
+    setActive((current) => (current + 1) % SLIDES.length);
+  };
+
+  const currentSlide = SLIDES[active];
 
   return (
     <section className="showcase" ref={sectionRef}>
@@ -89,17 +78,56 @@ export default function Showcase() {
             transition: "opacity 0.9s ease 0.15s, transform 0.9s ease 0.15s",
           }}
         >
-          <div
-            className={`showcase__devices ${
-              animating ? "showcase__devices--exit" : "showcase__devices--enter"
-            }`}
-          >
+          <div className="showcase__devices">
+            <button
+              className="showcase__control showcase__control--prev"
+              onClick={goPrev}
+              type="button"
+              aria-label="Previous showcase"
+            >
+              <svg
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </button>
+
             <img
-              className="showcase__designs"
-              src={SLIDES[active].image}
-              alt={`${SLIDES[active].label} showcase`}
+              key={currentSlide.id}
+              className={`showcase__designs showcase__designs--from-${direction}`}
+              src={currentSlide.image}
+              alt={`${currentSlide.label} showcase`}
               draggable={false}
             />
+
+            <button
+              className="showcase__control showcase__control--next"
+              onClick={goNext}
+              type="button"
+              aria-label="Next showcase"
+            >
+              <svg
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path d="M9 6l6 6-6 6" />
+              </svg>
+            </button>
           </div>
 
           <div className="showcase__ellipse-spot">
@@ -110,11 +138,10 @@ export default function Showcase() {
 
           <div className="showcase__label-wrap">
             <p
-              className={`showcase__label ${
-                animating ? "showcase__label--exit" : "showcase__label--enter"
-              }`}
+              key={currentSlide.label}
+              className={`showcase__label showcase__label--from-${direction}`}
             >
-              {SLIDES[active].label}
+              {currentSlide.label}
             </p>
           </div>
 
@@ -123,16 +150,17 @@ export default function Showcase() {
             role="tablist"
             aria-label="Slide indicators"
           >
-            {SLIDES.map((s, i) => (
+            {SLIDES.map((slide, index) => (
               <button
-                key={s.id}
+                key={slide.id}
                 className={`showcase__dot ${
-                  i === active ? "showcase__dot--active" : ""
+                  index === active ? "showcase__dot--active" : ""
                 }`}
-                onClick={() => goTo(i)}
+                onClick={() => goTo(index)}
+                type="button"
                 role="tab"
-                aria-selected={i === active}
-                aria-label={s.label}
+                aria-selected={index === active}
+                aria-label={slide.label}
               />
             ))}
           </div>

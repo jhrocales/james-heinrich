@@ -1,9 +1,3 @@
-/* ═══════════════════════════════════════════
-   SHOWCASE — What I Provide
-   Variables from index.css
-═══════════════════════════════════════════ */
-
-/* ── Section ─────────────────────────────────────────────────────── */
 .showcase {
   position: relative;
   width: 100%;
@@ -17,7 +11,6 @@
   padding: 8px var(--site-padding) 0px;
 }
 
-/* ── Container ───────────────────────────────────────────────────── */
 .showcase__container {
   display: flex;
   flex-direction: column;
@@ -29,7 +22,6 @@
   justify-content: center;
 }
 
-/* ── Title ───────────────────────────────────────────────────────── */
 .showcase__title {
   font-family: "Marcellus", serif;
   font-weight: 400;
@@ -41,7 +33,6 @@
   margin-bottom: clamp(32px, 5vh, 64px);
 }
 
-/* ── Gallery ─────────────────────────────────────────────────────── */
 .showcase__gallery {
   position: relative;
   padding-top: 40px;
@@ -53,17 +44,16 @@
   flex-shrink: 0;
 }
 
-/* ── Devices ─────────────────────────────────────────────────────── */
 .showcase__devices {
   position: relative;
   width: 100%;
   height: clamp(200px, 30vh, 340px);
   z-index: 1;
+  overflow: visible;
 }
 
 .showcase__designs {
   position: absolute;
-
   left: 50%;
   top: 50%;
   width: min(112%, 780px);
@@ -76,37 +66,80 @@
   pointer-events: none;
 }
 
-.showcase__devices--enter {
-  animation: devicesEnter 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+.showcase__designs--from-next {
+  animation: showcaseImageFromRight 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.showcase__devices--exit {
-  animation: devicesExit 0.4s ease both;
+.showcase__designs--from-prev {
+  animation: showcaseImageFromLeft 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-@keyframes devicesEnter {
+@keyframes showcaseImageFromRight {
   from {
     opacity: 0;
-    transform: translateY(32px);
+    transform: translate(calc(-50% + 56px), -50%);
   }
+
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate(-50%, -50%);
   }
 }
 
-@keyframes devicesExit {
+@keyframes showcaseImageFromLeft {
   from {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  to {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translate(calc(-50% - 56px), -50%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
   }
 }
 
-/* ── Ellipse spotlight ────────────────────────────────────────────── */
+.showcase__control {
+  position: absolute;
+  top: 50%;
+  z-index: 5;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  border: 1px solid rgba(196, 181, 253, 0.22);
+  background: rgba(22, 21, 34, 0.58);
+  color: rgba(244, 242, 255, 0.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transform: translateY(-50%);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition:
+    color 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+.showcase__control:hover {
+  color: var(--text-primary);
+  border-color: rgba(196, 181, 253, 0.38);
+  background: rgba(139, 92, 246, 0.22);
+  transform: translateY(-50%) scale(1.04);
+}
+
+.showcase__control--prev {
+  left: -58px;
+}
+
+.showcase__control--next {
+  right: -58px;
+}
+
 .showcase__ellipse-spot {
   position: relative;
   width: 90%;
@@ -120,7 +153,6 @@
   display: block;
 }
 
-/* ── Divider ─────────────────────────────────────────────────────── */
 .showcase__divider {
   width: 84%;
   height: 1px;
@@ -136,7 +168,6 @@
   z-index: 1;
 }
 
-/* ── Label ───────────────────────────────────────────────────────── */
 .showcase__label-wrap {
   height: 52px;
   display: flex;
@@ -147,6 +178,7 @@
 }
 
 .showcase__label {
+  margin: 0;
   font-family: "Open Sans", sans-serif;
   font-weight: 300;
   font-size: clamp(16px, 1.8vw, 24px);
@@ -156,37 +188,38 @@
   white-space: nowrap;
 }
 
-.showcase__label--enter {
-  animation: labelEnter 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+.showcase__label--from-next {
+  animation: showcaseLabelFromRight 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.showcase__label--exit {
-  animation: labelExit 0.4s ease both;
+.showcase__label--from-prev {
+  animation: showcaseLabelFromLeft 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-@keyframes labelEnter {
+@keyframes showcaseLabelFromRight {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateX(24px);
   }
+
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(0);
   }
 }
 
-@keyframes labelExit {
+@keyframes showcaseLabelFromLeft {
   from {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  to {
     opacity: 0;
-    transform: translateY(-14px);
+    transform: translateX(-24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
-/* ── Dots — on brand glass style ─────────────────────────────────── */
 .showcase__dots {
   display: flex;
   align-items: center;
@@ -213,13 +246,11 @@
     width 0.3s ease;
 }
 
-/* inactive dot — narrow */
 .showcase__dot:not(.showcase__dot--active) {
   width: 6px;
   background: rgba(244, 242, 255, 0.15);
 }
 
-/* active dot — wider pill, violet glass */
 .showcase__dot--active {
   width: 28px;
   background: rgba(139, 92, 246, 0.25);
@@ -229,7 +260,6 @@
     0 0 8px rgba(139, 92, 246, 0.4);
 }
 
-/* active dot specular rim */
 .showcase__dot--active::before {
   content: "";
   position: absolute;
@@ -245,7 +275,6 @@
   );
 }
 
-/* active dot fill bar */
 .showcase__dot--active::after {
   content: "";
   position: absolute;
@@ -259,7 +288,6 @@
   );
 }
 
-/* ── Responsive ──────────────────────────────────────────────────── */
 @media (max-width: 640px) {
   .showcase {
     padding: 80px var(--site-padding) 40px;
@@ -269,5 +297,18 @@
 
   .showcase__devices {
     height: 220px;
+  }
+
+  .showcase__control {
+    width: 36px;
+    height: 36px;
+  }
+
+  .showcase__control--prev {
+    left: 4px;
+  }
+
+  .showcase__control--next {
+    right: 4px;
   }
 }

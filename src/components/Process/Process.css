@@ -111,7 +111,18 @@
   cursor: pointer;
 }
 
+.pv-node-wrap::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: var(--bg-main);
+  z-index: 0;
+  pointer-events: none;
+}
+
 .pv-node {
+  z-index: 1;
   position: absolute;
   inset: 0;
   border-radius: 50%;
@@ -239,16 +250,17 @@
 }
 
 .pv-label-wrap--left {
-  transform: translate(-200%, -225%);
+  transform: translate(-200%, -480%);
   text-align: right;
 }
 
 .pv-label-wrap--right {
-  transform: translate(-40%, -250%);
+  transform: translate(-40%, -450%);
   text-align: left;
 }
 
 .pv-label {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 3px;
@@ -270,13 +282,28 @@
 }
 
 .pv-label__sub {
+  position: absolute;
+  top: calc(100% + 8px);
   display: block;
+  width: 230px;
   font-family: "Open Sans", sans-serif;
-  font-weight: 300;
-  font-size: clamp(7px, 0.75vw, 11px);
+  font-weight: 500;
+  font-size: clamp(12px, 0.62vw, 10px);
   color: var(--text-secondary);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  line-height: 1.45;
+  text-transform: none;
+  white-space: normal;
+}
+
+.pv-label--left .pv-label__sub {
+  right: 0;
+  text-align: right;
+}
+
+.pv-label--right .pv-label__sub {
+  left: 0;
+  text-align: left;
 }
 
 @media (max-width: 640px) {

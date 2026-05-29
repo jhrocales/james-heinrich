@@ -4,9 +4,6 @@ import DesignsImage from "../../assets/Showcase Page/designs.png";
 import TestimonialsImage from "../../assets/Showcase Page/testimonials.png";
 import SEOImage from "../../assets/Showcase Page/SEO.png";
 
-const IMG_ELLIPSE2 =
-  "https://www.figma.com/api/mcp/asset/057862df-d629-43ef-9dbf-3f9ff51dbeb3";
-
 const SLIDES = [
   { id: 1, label: "Customer Centered Design", image: DesignsImage },
   { id: 2, label: "Verified Client Feedback", image: TestimonialsImage },
@@ -130,9 +127,7 @@ export default function Showcase() {
             </button>
           </div>
 
-          <div className="showcase__ellipse-spot">
-            <img src={IMG_ELLIPSE2} alt="" draggable={false} />
-          </div>
+          <div className="showcase__ellipse-spot" aria-hidden="true" />
 
           <div className="showcase__divider" />
 

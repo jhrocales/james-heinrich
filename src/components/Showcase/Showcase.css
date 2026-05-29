@@ -142,15 +142,22 @@
 
 .showcase__ellipse-spot {
   position: relative;
-  width: 90%;
-  margin-top: -20px;
+  width: min(720px, 90%);
+  height: clamp(92px, 12vh, 140px);
+  margin-top: clamp(60px, -6vh, -28px);
   z-index: 0;
   pointer-events: none;
-}
 
-.showcase__ellipse-spot img {
-  width: 100%;
-  display: block;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(139, 92, 246, 0.34) 0%,
+    rgba(139, 92, 246, 0.18) 30%,
+    rgba(139, 92, 246, 0.07) 52%,
+    rgba(139, 92, 246, 0) 76%
+  );
+
+  filter: blur(18px);
+  transform: scaleX(1.18);
 }
 
 .showcase__divider {

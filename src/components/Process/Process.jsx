@@ -126,7 +126,7 @@ function getSegmentPath(segment) {
   return `M ${from.x} ${from.y} C ${c1x} ${from.y}, ${c2x} ${to.y}, ${to.x} ${to.y}`;
 }
 
-function FlowLine({ segments, width, height, visible }) {
+function FlowLine({ segments, width, height, visible, activeFlow }) {
   if (!width || !height || !segments.length) return null;
 
   return (
@@ -161,7 +161,13 @@ function FlowLine({ segments, width, height, visible }) {
         const pathD = getSegmentPath(segment);
 
         return (
-          <g key={index}>
+          <g
+            key={index}
+            className={`pv-flow__segment ${
+              activeFlow === index ? "is-active" : ""
+            }`}
+            style={{ "--flow-delay": `${index * 260}ms` }}
+          >
             <path
               className="pv-flow__path pv-flow__bloom"
               d={pathD}
@@ -195,6 +201,7 @@ function FlowLine({ segments, width, height, visible }) {
 }
 
 export default function Process() {
+  const [activeFlow, setActiveFlow] = useState(null);
   const sectionRef = useRef(null);
   const canvasRef = useRef(null);
   const nodeRefs = useRef([]);
@@ -216,7 +223,10 @@ export default function Process() {
           io.disconnect();
         }
       },
-      { threshold: 0.05 },
+      {
+        threshold: 0.25,
+        rootMargin: "0px 0px -20% 0px",
+      },
     );
 
     io.observe(el);
@@ -319,6 +329,7 @@ export default function Process() {
           width={flow.width}
           height={flow.height}
           visible={visible}
+          activeFlow={activeFlow}
         />
 
         {STEPS.map((step, i) => {
@@ -336,6 +347,12 @@ export default function Process() {
                   left: `${cx[i]}%`,
                   top: `${cy[i]}%`,
                   width: `${NODE_D}%`,
+                }}
+                onMouseEnter={() => {
+                  setActiveFlow(i < FLOW_ANCHORS.length ? i : null);
+                }}
+                onMouseLeave={() => {
+                  setActiveFlow(null);
                 }}
               >
                 <GlassNode icon={step.icon} visible={visible} delay={delay} />

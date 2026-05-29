@@ -52,12 +52,33 @@
   opacity: 0;
   transition:
     stroke-dashoffset 1.25s ease,
-    opacity 0.65s ease;
+    opacity 0.65s ease,
+    stroke 0.45s ease;
+  transition-delay: var(--flow-delay, 0ms);
 }
 
-.pv-flow__bloom {
-  stroke: #8b5cf6;
-  stroke-width: 44px;
+.pv-flow.is-visible .pv-flow__segment.is-active .pv-flow__path {
+  transition-delay: 0ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.pv-flow.is-visible .pv-flow__segment.is-active .pv-flow__bloom {
+  opacity: 0.1;
+}
+
+.pv-flow.is-visible .pv-flow__segment.is-active .pv-flow__chrome {
+  opacity: 1;
+  stroke: #c4b5fd;
+}
+
+.pv-flow.is-visible .pv-flow__segment.is-active .pv-flow__glass {
+  opacity: 1;
+  stroke: rgba(139, 92, 246, 0.85);
+}
+
+.pv-flow.is-visible .pv-flow__segment.is-active .pv-flow__specular {
+  opacity: 1;
+  stroke: rgba(255, 255, 255, 0.92);
 }
 
 .pv-flow__chrome {

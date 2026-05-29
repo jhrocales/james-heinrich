@@ -44,15 +44,17 @@ function ExploreCard() {
 
       <p className="card__tag card__tag--left">About</p>
 
-      <h3 className="card__title">{`More\nAbout Me`}</h3>
+      <div className="card__content">
+        <h3 className="card__title">{`More\nAbout Me`}</h3>
 
-      <p className="card__body">
-        Skill alone does not get anything far, especially in building that
-        lasts. Get to know more about me — my story, personality, approach, and
-        work philosophy.
-      </p>
+        <p className="card__body">
+          Skill alone does not get anything far, especially in building that
+          lasts. Get to know more about me — my story, personality, approach,
+          and work philosophy.
+        </p>
 
-      <LowkeyButton label="Explore" arrowLeft={true} href="#about" />
+        <LowkeyButton label="Explore" arrowLeft={true} href="#about" />
+      </div>
     </div>
   );
 }
@@ -66,45 +68,51 @@ function ConnectCard() {
 
       <p className="card__tag card__tag--center">Connect</p>
 
-      <h3 className="card__title">{`Let's Establish\nYour Vision`}</h3>
+      <div className="card__content">
+        <h3 className="card__title">{`Let's Establish\nYour Vision`}</h3>
 
-      <p className="card__body">
-        True impact happens exactly where character and technical mastery meet.
-        If my work philosophy and end-to-end development expertise align with
-        your goals, let's build something exceptional together.
-      </p>
+        <p className="card__body">
+          True impact happens exactly where character and technical mastery
+          meet. If my work philosophy and end-to-end development expertise align
+          with your goals, let's build something exceptional together.
+        </p>
 
-      <div className="card__icon-links" aria-label="Social links">
-        <a
-          href="mailto:hello@example.com"
-          className="card__icon-link"
-          aria-label="Email"
-        >
-          <img src={IconGmail} alt="" aria-hidden="true" />
-        </a>
+        <div className="card__icon-links" aria-label="Social links">
+          <a
+            href="mailto:hello@example.com"
+            className="card__icon-link"
+            aria-label="Email"
+          >
+            <img src={IconGmail} alt="" aria-hidden="true" />
+          </a>
 
-        <a
-          href="https://linkedin.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="card__icon-link"
-          aria-label="LinkedIn"
-        >
-          <img src={IconLinkedIn} alt="" aria-hidden="true" />
-        </a>
+          <a
+            href="https://linkedin.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="card__icon-link"
+            aria-label="LinkedIn"
+          >
+            <img src={IconLinkedIn} alt="" aria-hidden="true" />
+          </a>
 
-        <a
-          href="https://github.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="card__icon-link"
-          aria-label="GitHub"
-        >
-          <img src={IconGithub} alt="" aria-hidden="true" />
-        </a>
+          <a
+            href="https://github.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="card__icon-link"
+            aria-label="GitHub"
+          >
+            <img src={IconGithub} alt="" aria-hidden="true" />
+          </a>
+        </div>
+
+        <CTAButton
+          label="Elevate Your Brand"
+          href="#connect"
+          showArrow={false}
+        />
       </div>
-
-      <CTAButton label="Elevate Your Brand" href="#connect" showArrow={false} />
     </div>
   );
 }
@@ -118,15 +126,17 @@ function DiscoverCard() {
 
       <p className="card__tag card__tag--right">Discover</p>
 
-      <h3 className="card__title">{`Designs &\nSystems I've Built`}</h3>
+      <div className="card__content">
+        <h3 className="card__title">{`Designs &\nSystems I've Built`}</h3>
 
-      <p className="card__body">
-        Character alone cannot execute a vision, especially when performance and
-        scale are non-negotiable. Explore the technical architectures, seamless
-        designs, and robust workflows I've engineered.
-      </p>
+        <p className="card__body">
+          Character alone cannot execute a vision, especially when performance
+          and scale are non-negotiable. Explore the technical architectures,
+          seamless designs, and robust workflows I've engineered.
+        </p>
 
-      <LowkeyButton label="Discover" arrowLeft={false} href="#work" />
+        <LowkeyButton label="Discover" arrowLeft={false} href="#work" />
+      </div>
     </div>
   );
 }

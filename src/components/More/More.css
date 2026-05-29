@@ -1,21 +1,15 @@
-/* ═══════════════════════════════════════════
-   MORE INFORMATION SECTION
-   Variables from index.css
-═══════════════════════════════════════════ */
-
-/* ── Section wrapper ── */
 .more {
   position: relative;
   width: 100%;
-  height: 100dvh; /* exactly one viewport */
+  height: 100dvh;
   background: var(--bg-second);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* vertically center everything */
+  justify-content: center;
   overflow: hidden;
   padding: 0 var(--site-padding);
-  gap: 32px; /* breathing room between eyebrow and grid */
+  gap: 32px;
 }
 
 .cta-btn--no-arrow {
@@ -24,7 +18,6 @@
   padding: 0 32px;
 }
 
-/* ── Eyebrow label ── */
 .more__eyebrow {
   display: flex;
   align-items: center;
@@ -48,10 +41,9 @@
   color: var(--text-primary);
 }
 
-/* ── Card grid ── */
 .more__grid {
   display: flex;
-  align-items: center; /* vertically align cards to center axis */
+  align-items: center;
   justify-content: center;
   gap: 10px;
   width: 100%;
@@ -59,9 +51,6 @@
   flex-shrink: 0;
 }
 
-/* ═══════════════════════════════════════════
-   SHARED CARD BASE
-═══════════════════════════════════════════ */
 .card {
   position: relative;
   border-radius: 24px;
@@ -71,7 +60,6 @@
   flex-shrink: 0;
 }
 
-/* specular rim */
 .card__specular {
   position: absolute;
   top: -1px;
@@ -88,7 +76,6 @@
   );
 }
 
-/* dome reflection */
 .card__dome {
   position: absolute;
   top: 0;
@@ -98,7 +85,6 @@
   z-index: 2;
 }
 
-/* bottom depth fade */
 .card__base {
   position: absolute;
   left: -1px;
@@ -112,17 +98,13 @@
   z-index: 2;
 }
 
-/* ═══════════════════════════════════════════
-   SIDE CARDS  (Explore + Discover)
-═══════════════════════════════════════════ */
 .card--side {
   width: 300px;
-  height: 400px; /* reduced from 440px */
-  padding: 64px 28px 28px; /* top padding creates space for absolute tag */
+  height: 400px;
+  padding: 64px 28px 28px;
   background: rgba(22, 21, 34, 0.7);
   border: 1px solid var(--border-color);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
-  gap: 10px;
 }
 
 .card--side .card__specular {
@@ -145,18 +127,14 @@
   top: 320px;
 }
 
-/* ═══════════════════════════════════════════
-   CENTER CARD  (Connect)
-═══════════════════════════════════════════ */
 .card--center {
   width: 380px;
-  height: 500px; /* reduced from 560px */
-  padding: 64px 32px 32px; /* top padding creates space for absolute tag */
+  height: 500px;
+  padding: 64px 32px 32px;
   background: rgba(139, 92, 246, 0.1);
   border: 1px solid rgba(167, 139, 250, 0.25);
   box-shadow: 0 12px 32px 0 var(--purple-soft);
   align-items: center;
-  gap: 12px;
 }
 
 .card--center .card__specular {
@@ -182,11 +160,6 @@
   top: 400px;
 }
 
-/* ═══════════════════════════════════════════
-   CARD TYPOGRAPHY
-═══════════════════════════════════════════ */
-
-/* tag — absolute so it doesn't affect flow */
 .card__tag {
   position: absolute;
   font-family: "DM Sans", sans-serif;
@@ -202,9 +175,11 @@
 .card__tag--left {
   left: 28px;
 }
+
 .card__tag--right {
   right: 28px;
 }
+
 .card__tag--center {
   left: 50%;
   transform: translateX(-50%);
@@ -213,8 +188,37 @@
   white-space: nowrap;
 }
 
-/* title */
+.card__content {
+  position: relative;
+  z-index: 4;
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card--explore .card__content {
+  align-items: flex-start;
+  text-align: left;
+  gap: 18px;
+}
+
+.card--discover .card__content {
+  align-items: flex-end;
+  text-align: right;
+  gap: 18px;
+}
+
+.card--center .card__content {
+  align-items: center;
+  text-align: center;
+  gap: 24px;
+}
+
 .card__title {
+  margin: 0;
   font-family: "Marcellus", serif;
   font-size: 24px;
   font-weight: 400;
@@ -238,29 +242,28 @@
   text-align: right;
 }
 
-/* body */
 .card__body {
+  margin: 0;
   font-family: "DM Sans", sans-serif;
   font-weight: 300;
-  font-size: 11px; /* up from 9px — more readable */
+  font-size: 11px;
   line-height: 1.7;
   letter-spacing: 0.01em;
   color: var(--text-secondary);
   position: relative;
   z-index: 4;
-  flex: 1; /* pushes button to bottom */
+  flex: 0;
 }
 
 .card--center .card__body {
   text-align: center;
+  max-width: 300px;
 }
+
 .card--discover .card__body {
   text-align: right;
 }
 
-/* ═══════════════════════════════════════════
-   SOCIAL ICON LINKS  (Connect card)
-═══════════════════════════════════════════ */
 .card__icon-links {
   display: flex;
   align-items: center;
@@ -281,19 +284,23 @@
   transition: opacity 0.2s ease;
   flex-shrink: 0;
 }
+
+.card__icon-link:nth-child(2) img {
+  transform: scale(1.6);
+  transform-origin: center;
+}
+
 .card__icon-link:hover {
   opacity: 1;
 }
 
 .card__icon-link img {
-  width: 100%;
-  height: 100%;
+  width: 32px;
+  height: 32px;
   object-fit: contain;
+  display: block;
 }
 
-/* ═══════════════════════════════════════════
-   LOWKEY GLASS BUTTON  (side cards)
-═══════════════════════════════════════════ */
 .btn-lowkey {
   position: relative;
   display: inline-flex;
@@ -309,7 +316,7 @@
   z-index: 4;
   flex-shrink: 0;
   text-decoration: none;
-  align-self: flex-start; /* left-align on explore, right on discover via JSX */
+  align-self: flex-start;
   box-shadow:
     0 2px 8px 0 rgba(0, 0, 0, 0.3),
     inset 0 1px 0 0 var(--white-soft),
@@ -418,12 +425,10 @@
     inset 0 -1px 4px 0 rgba(0, 0, 0, 0.2);
 }
 
-/* discover card — right-align button */
 .card--discover .btn-lowkey {
   align-self: flex-end;
 }
 
-/* ── Entrance animations ── */
 .more__eyebrow,
 .card--explore,
 .card--center,
@@ -435,7 +440,6 @@
     transform 0.8s ease;
 }
 
-/* when JS adds this class, element animates in */
 .more__eyebrow.is-visible,
 .card--explore.is-visible,
 .card--center.is-visible,
@@ -444,13 +448,14 @@
   transform: translateY(0);
 }
 
-/* staggered delays */
 .card--explore {
   transition-delay: 0.1s;
 }
+
 .card--center {
   transition-delay: 0.25s;
 }
+
 .card--discover {
   transition-delay: 0.4s;
 }

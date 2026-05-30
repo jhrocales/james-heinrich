@@ -79,3 +79,73 @@ body {
 
   padding: 140px var(--site-padding);
 }
+/* ─────────────────────────
+   GLOBAL MEDIA / RESPONSIVE BASE
+───────────────────────── */
+
+html {
+  scroll-behavior: smooth;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  max-width: 100%;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+/* ─────────────────────────
+   MOBILE BASE
+───────────────────────── */
+
+@media (max-width: 768px) {
+  :root {
+    --site-padding: clamp(20px, 5vw, 32px);
+  }
+
+  .section {
+    min-height: 100svh;
+  }
+
+  .section__container {
+    max-width: 100%;
+    padding: 96px var(--site-padding) 72px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --site-padding: 20px;
+  }
+
+  .section__container {
+    padding: 88px var(--site-padding) 64px;
+  }
+}
+
+/* ─────────────────────────
+   ACCESSIBILITY
+───────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

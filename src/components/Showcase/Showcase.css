@@ -302,20 +302,32 @@
     min-height: 100dvh;
   }
 
+  .showcase__title {
+    font-size: clamp(40px, 4vw, 56px);
+  }
   .showcase__devices {
     height: 220px;
   }
 
   .showcase__control {
-    width: 36px;
-    height: 36px;
+    width: 24px;
+    height: 24px;
   }
 
   .showcase__control--prev {
-    left: 4px;
+    left: 0px;
   }
 
   .showcase__control--next {
-    right: 4px;
+    right: 0px;
+  }
+
+  .showcase__ellipse-spot {
+    margin-top: 0px;
+  }
+
+  .showcase__label {
+    font-weight: 300;
+    font-size: clamp(19px, 1.8vw, 24px);
   }
 }

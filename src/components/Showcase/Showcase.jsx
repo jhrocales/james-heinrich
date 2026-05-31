@@ -64,7 +64,7 @@ export default function Showcase() {
             transition: "opacity 0.8s ease, transform 0.8s ease",
           }}
         >
-          What I provide
+          What I Provide
         </h2>
 
         <div

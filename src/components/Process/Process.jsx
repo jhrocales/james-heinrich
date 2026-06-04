@@ -72,10 +72,37 @@ const FLOW_ANCHORS = [
 ];
 
 const NODE_D = 11;
-const NODE_R = NODE_D / 2;
 const PAD_TOP = 5;
 const PAD_BOT = 5;
 const LABEL_GAP = 1;
+const MOBILE_VERTICAL_SCALE = 0.8;
+const MOBILE_NODE_D = 16;
+const MOBILE_LABEL_GAP = 0.5;
+const MOBILE_X_SPREAD = 5;
+
+function useMediaQuery(query) {
+  const [matches, setMatches] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.matchMedia(query).matches;
+  });
+
+  useEffect(() => {
+    const media = window.matchMedia(query);
+
+    const update = () => {
+      setMatches(media.matches);
+    };
+
+    update();
+    media.addEventListener("change", update);
+
+    return () => {
+      media.removeEventListener("change", update);
+    };
+  }, [query]);
+
+  return matches;
+}
 
 function GlassNode({ icon, visible, delay }) {
   return (
@@ -212,6 +239,8 @@ export default function Process() {
     segments: [],
   });
 
+  const isMobileLayout = useMediaQuery("(max-width: 640px)");
+
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
@@ -236,6 +265,9 @@ export default function Process() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+
+    let frameOne;
+    let frameTwo;
 
     const updateFlow = () => {
       const canvasRect = canvas.getBoundingClientRect();
@@ -289,24 +321,57 @@ export default function Process() {
       });
     };
 
-    const frame = requestAnimationFrame(updateFlow);
-    const ro = new ResizeObserver(updateFlow);
+    const scheduleUpdate = () => {
+      cancelAnimationFrame(frameOne);
+      cancelAnimationFrame(frameTwo);
+
+      frameOne = requestAnimationFrame(() => {
+        updateFlow();
+        frameTwo = requestAnimationFrame(updateFlow);
+      });
+    };
+
+    const ro = new ResizeObserver(scheduleUpdate);
 
     ro.observe(canvas);
-    window.addEventListener("resize", updateFlow);
+    nodeRefs.current.forEach((node) => {
+      if (node) ro.observe(node);
+    });
+
+    window.addEventListener("resize", scheduleUpdate);
+
+    scheduleUpdate();
 
     return () => {
-      cancelAnimationFrame(frame);
+      cancelAnimationFrame(frameOne);
+      cancelAnimationFrame(frameTwo);
       ro.disconnect();
-      window.removeEventListener("resize", updateFlow);
+      window.removeEventListener("resize", scheduleUpdate);
     };
-  }, []);
+  }, [isMobileLayout]);
 
-  const usableH = 100 - PAD_TOP - PAD_BOT;
+  const baseUsableH = 100 - PAD_TOP - PAD_BOT;
+  const usableH = isMobileLayout
+    ? baseUsableH * MOBILE_VERTICAL_SCALE
+    : baseUsableH;
+
+  const padTop = isMobileLayout ? (100 - usableH) / 2 : PAD_TOP;
   const rowH = usableH / (STEPS.length - 1);
 
-  const cy = STEPS.map((_, i) => PAD_TOP + i * rowH);
-  const cx = STEPS.map((s) => (s.col === "left" ? LEFT_CX : RIGHT_CX));
+  const nodeD = isMobileLayout ? MOBILE_NODE_D : NODE_D;
+  const nodeR = nodeD / 2;
+  const labelGap = isMobileLayout ? MOBILE_LABEL_GAP : LABEL_GAP;
+
+  const cy = STEPS.map((_, i) => padTop + i * rowH);
+
+  const mobileLeftCx = LEFT_CX - MOBILE_X_SPREAD;
+  const mobileRightCx = RIGHT_CX + MOBILE_X_SPREAD;
+
+  const cx = STEPS.map((s) => {
+    if (!isMobileLayout) return s.col === "left" ? LEFT_CX : RIGHT_CX;
+
+    return s.col === "left" ? mobileLeftCx : mobileRightCx;
+  });
 
   return (
     <section className="provide" ref={sectionRef}>
@@ -346,7 +411,7 @@ export default function Process() {
                 style={{
                   left: `${cx[i]}%`,
                   top: `${cy[i]}%`,
-                  width: `${NODE_D}%`,
+                  width: `${nodeD}%`,
                 }}
                 onMouseEnter={() => {
                   setActiveFlow(i < FLOW_ANCHORS.length ? i : null);
@@ -363,8 +428,8 @@ export default function Process() {
                 style={{
                   top: `${cy[i]}%`,
                   ...(isLeft
-                    ? { left: `${cx[i] - NODE_R - LABEL_GAP}%` }
-                    : { left: `${cx[i] + NODE_R + LABEL_GAP}%` }),
+                    ? { left: `${cx[i] - nodeR - labelGap}%` }
+                    : { left: `${cx[i] + nodeR + labelGap}%` }),
                 }}
               >
                 <StepLabel

@@ -329,19 +329,126 @@
 
 @media (max-width: 640px) {
   .provide {
-    height: auto;
-    min-height: 100dvh;
-    padding: 80px var(--site-padding) 48px;
+    height: 100svh;
+    min-height: 100svh;
+    padding: 82px var(--site-padding) 24px;
+    overflow: hidden;
   }
 
   .provide__heading {
     align-self: center;
     text-align: center;
+    font-size: clamp(38px, 11vw, 52px);
+    line-height: 1.04;
+    position: relative;
+    z-index: 4;
   }
 
   .provide__canvas {
-    flex: none;
-    height: 520px;
+    flex: 1;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    margin-top: 28px;
+  }
+
+  .pv-node-wrap {
+    transform: translate(-100%, -76%);
+  }
+
+  .pv-node-wrap::before {
+    inset: -5px;
+  }
+
+  .pv-flow__bloom {
+    stroke: #8b5cf6;
+    stroke-width: 26px;
+  }
+
+  .pv-flow__chrome {
+    stroke-width: 14px;
+  }
+
+  .pv-flow__glass {
+    stroke-width: 11px;
+  }
+
+  .pv-flow__shadow {
+    stroke-width: 4px;
+    transform: translateY(-3px);
+  }
+
+  .pv-flow__specular {
+    stroke-width: 1.8px;
+    transform: translateY(-5px);
+  }
+
+  .pv-label-wrap {
+    max-width: none;
+    width: min(128px, 34vw);
+  }
+
+  .pv-label-wrap--left {
+    transform: translate(-80%, 50%);
+    text-align: right;
+  }
+
+  .pv-label-wrap--right {
+    transform: translate(-50%, 50%);
+    text-align: left;
+  }
+
+  .pv-label {
+    gap: 3px;
+    white-space: normal;
+  }
+
+  .pv-label__title {
+    font-size: 12px;
+    line-height: 1;
+    letter-spacing: 0.02em;
+  }
+
+  .pv-label__sub {
+    position: static;
+    width: 100%;
+    margin-top: 5px;
+    font-size: 8.5px;
+    font-weight: 400;
+    line-height: 1.32;
+    letter-spacing: 0.01em;
+    white-space: normal;
+  }
+
+  .pv-label--left .pv-label__sub {
+    text-align: right;
+  }
+
+  .pv-label--right .pv-label__sub {
+    text-align: left;
+  }
+}
+
+@media (max-width: 420px) {
+  .provide {
+    padding-top: 78px;
+    padding-bottom: 22px;
+  }
+
+  .provide__heading {
+    font-size: clamp(36px, 10.5vw, 48px);
+  }
+
+  .provide__canvas {
+    margin-top: 24px;
+  }
+
+  .pv-node-wrap {
+    width: clamp(56px, 15vw, 64px) !important;
+  }
+
+  .pv-label-wrap {
+    width: min(116px, 32vw);
   }
 
   .pv-label__title {
@@ -349,6 +456,7 @@
   }
 
   .pv-label__sub {
-    font-size: 7px;
+    font-size: 8px;
+    line-height: 1.3;
   }
 }

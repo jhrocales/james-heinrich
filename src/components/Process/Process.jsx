@@ -76,9 +76,10 @@ const PAD_TOP = 5;
 const PAD_BOT = 5;
 const LABEL_GAP = 1;
 const MOBILE_VERTICAL_SCALE = 0.8;
-const MOBILE_NODE_D = 16;
+const MOBILE_NODE_D = 21.5;
 const MOBILE_LABEL_GAP = 0.5;
 const MOBILE_X_SPREAD = 5;
+const MOBILE_X_OFFSET = 5;
 
 function useMediaQuery(query) {
   const [matches, setMatches] = useState(() => {
@@ -126,10 +127,12 @@ function GlassNode({ icon, visible, delay }) {
   );
 }
 
-function StepLabel({ label, description, side, visible, delay }) {
+function StepLabel({ label, description, side, visible, delay, isActive }) {
   return (
     <div
-      className={`pv-label pv-label--${side}`}
+      className={`pv-label pv-label--${side}${
+        isActive ? " is-description-visible" : ""
+      }`}
       style={{
         transitionDelay: `${delay}ms`,
         opacity: visible ? 1 : 0,
@@ -229,6 +232,7 @@ function FlowLine({ segments, width, height, visible, activeFlow }) {
 
 export default function Process() {
   const [activeFlow, setActiveFlow] = useState(null);
+  const [activeStep, setActiveStep] = useState(null);
   const sectionRef = useRef(null);
   const canvasRef = useRef(null);
   const nodeRefs = useRef([]);
@@ -364,14 +368,22 @@ export default function Process() {
 
   const cy = STEPS.map((_, i) => padTop + i * rowH);
 
-  const mobileLeftCx = LEFT_CX - MOBILE_X_SPREAD;
-  const mobileRightCx = RIGHT_CX + MOBILE_X_SPREAD;
+  const mobileLeftCx = LEFT_CX - MOBILE_X_SPREAD + MOBILE_X_OFFSET;
+  const mobileRightCx = RIGHT_CX + MOBILE_X_SPREAD + MOBILE_X_OFFSET;
 
   const cx = STEPS.map((s) => {
     if (!isMobileLayout) return s.col === "left" ? LEFT_CX : RIGHT_CX;
 
     return s.col === "left" ? mobileLeftCx : mobileRightCx;
   });
+
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      window.dispatchEvent(new Event("resize"));
+    });
+
+    return () => cancelAnimationFrame(frame);
+  }, [isMobileLayout, mobileLeftCx, mobileRightCx]);
 
   return (
     <section className="provide" ref={sectionRef}>
@@ -415,10 +427,22 @@ export default function Process() {
                 }}
                 onMouseEnter={() => {
                   setActiveFlow(i < FLOW_ANCHORS.length ? i : null);
+                  setActiveStep(i);
                 }}
                 onMouseLeave={() => {
                   setActiveFlow(null);
                 }}
+                onFocus={() => {
+                  setActiveFlow(i < FLOW_ANCHORS.length ? i : null);
+                  setActiveStep(i);
+                }}
+                onBlur={() => {
+                  setActiveFlow(null);
+                }}
+                onClick={() => {
+                  setActiveStep(i);
+                }}
+                tabIndex={0}
               >
                 <GlassNode icon={step.icon} visible={visible} delay={delay} />
               </div>
@@ -438,6 +462,7 @@ export default function Process() {
                   side={step.col}
                   visible={visible}
                   delay={delay}
+                  isActive={activeStep === i}
                 />
               </div>
             </div>

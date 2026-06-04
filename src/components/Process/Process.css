@@ -315,6 +315,20 @@
   line-height: 1.45;
   text-transform: none;
   white-space: normal;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  pointer-events: none;
+  transition:
+    opacity 0.35s ease,
+    visibility 0.35s ease,
+    transform 0.35s ease;
+}
+
+.pv-label.is-description-visible .pv-label__sub {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
 .pv-label--left .pv-label__sub {
@@ -394,7 +408,7 @@
   }
 
   .pv-label-wrap--right {
-    transform: translate(-50%, 50%);
+    transform: translate(-80%, 50%);
     text-align: left;
   }
 
@@ -418,6 +432,14 @@
     line-height: 1.32;
     letter-spacing: 0.01em;
     white-space: normal;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px);
+    pointer-events: none;
+    transition:
+      opacity 0.35s ease,
+      visibility 0.35s ease,
+      transform 0.35s ease;
   }
 
   .pv-label--left .pv-label__sub {
@@ -441,10 +463,6 @@
 
   .provide__canvas {
     margin-top: 24px;
-  }
-
-  .pv-node-wrap {
-    width: clamp(56px, 15vw, 64px) !important;
   }
 
   .pv-label-wrap {

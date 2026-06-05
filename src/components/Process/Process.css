@@ -352,8 +352,6 @@
   }
 
   .provide__heading {
-    align-self: center;
-    text-align: center;
     font-size: clamp(38px, 11vw, 52px);
     line-height: 1.04;
     position: relative;
@@ -368,7 +366,7 @@
   }
 
   .pv-node-wrap {
-    transform: translate(-100%, -76%);
+    transform: translate(-100%, -96%);
   }
 
   .pv-node-wrap::before {
@@ -404,12 +402,12 @@
   }
 
   .pv-label-wrap--left {
-    transform: translate(-80%, 50%);
+    transform: translate(-80%, 30%);
     text-align: right;
   }
 
   .pv-label-wrap--right {
-    transform: translate(-80%, 50%);
+    transform: translate(-80%, 30%);
     text-align: left;
   }
 

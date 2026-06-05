@@ -71,15 +71,7 @@ const FLOW_ANCHORS = [
   },
 ];
 
-const NODE_D = 11;
-const PAD_TOP = 10;
-const PAD_BOT = 10;
-const LABEL_GAP = 1;
-const MOBILE_VERTICAL_SCALE = 1;
-const MOBILE_NODE_D = 21.5;
-const MOBILE_LABEL_GAP = 0.5;
-const MOBILE_X_SPREAD = 8;
-const MOBILE_X_OFFSET = 5;
+
 
 function useMediaQuery(query) {
   const [matches, setMatches] = useState(() => {

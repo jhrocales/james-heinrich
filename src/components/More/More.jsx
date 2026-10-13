@@ -79,7 +79,9 @@ function ConnectCard() {
 
         <div className="card__icon-links" aria-label="Social links">
           <a
-            href="mailto:hello@example.com"
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=jhrocales@gmail.com&su=Project%20Inquiry"
+            target="_blank"
+            rel="noopener noreferrer"
             className="card__icon-link"
             aria-label="Email"
           >
@@ -87,7 +89,7 @@ function ConnectCard() {
           </a>
 
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/james-heinrich-rocales-376a3b372/"
             target="_blank"
             rel="noopener noreferrer"
             className="card__icon-link"
@@ -97,7 +99,7 @@ function ConnectCard() {
           </a>
 
           <a
-            href="https://github.com"
+            href="https://github.com/jhrocales"
             target="_blank"
             rel="noopener noreferrer"
             className="card__icon-link"
@@ -107,11 +109,7 @@ function ConnectCard() {
           </a>
         </div>
 
-        <CTAButton
-          label="Elevate Your Brand"
-          href="#connect"
-          showArrow={false}
-        />
+        <CTAButton label="Elevate Your Brand" showArrow={false} />
       </div>
     </div>
   );

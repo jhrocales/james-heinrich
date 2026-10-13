@@ -2,12 +2,14 @@ import "./CTAButton.css";
 
 export default function CTAButton({
   label = "Elevate Your Brand",
-  href = "#connect",
+  href = "https://mail.google.com/mail/?view=cm&fs=1&to=jhrocales@gmail.com&su=Project%20Inquiry",
   showArrow = true,
 }) {
   return (
     <a
       href={href}
+      target="_blank"
+      rel="noopener noreferrer"
       className={`cta-btn${!showArrow ? " cta-btn--no-arrow" : ""}`}
       aria-label={label}
     >
